@@ -24,6 +24,15 @@ To use the command-line interactive query tool:
 ./cbq -engine=http://localhost:8093/
 ```
 
+#### Setup Data Bucket (Database)
+
+Create your Data Bucket in Couchbase with web Admin Console.
+Run the following command in the interactive query tool:
+
+```sql
+CREATE PRIMARY INDEX ON [bucket-name]
+```
+
 ### Node.js
 
 Download and install from http://nodejs.org/
@@ -54,3 +63,13 @@ slc run
 #### API Explorer
 
 See http://127.0.0.1:3000/explorer
+
+## Developing
+
+### Angular Service for API
+
+Run in `rtd-server/`:
+
+```bash
+lb-ng server/server.js client/lb-services.js
+```
