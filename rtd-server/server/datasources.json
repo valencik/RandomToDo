@@ -1,6 +1,17 @@
 {
+  "test-db": {
+    "name": "test-db",
+    "connector": "memory"
+  },
   "db": {
     "name": "db",
-    "connector": "memory"
+    "connector": "couchbase",
+    "host": "127.0.0.1",
+    "port": 8091,
+    "password": "glavin",
+    "n1qlport": 8093,
+    "database": "rtd",
+    "connectionTimeout": 20000,
+    "operationTimeout": 15000
   }
 }
