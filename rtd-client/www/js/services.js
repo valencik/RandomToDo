@@ -1,5 +1,45 @@
 angular.module('starter.services', [])
 
+.factory('Todos', function() {
+
+    // Some fake testing data
+  var todos = [{
+    id: 0,
+    name: 'Plank',
+    description: 'Let\'s get horizontal.',
+  }, {
+    id: 1,
+    name: 'Milking',
+    description: 'Pour some milk on your head!',
+  }, {
+    id: 2,
+    name: 'Buy someone a bagel.',
+    description: 'Share the love.',
+  }, {
+    id: 3,
+    name: 'Sing in the shower',
+    description: 'You\'re a star!',
+  }];
+
+    return {
+    all: function() {
+      return todos;
+    },
+    remove: function(todo) {
+      todos.splice(todos.indexOf(todo), 1);
+    },
+    get: function(todoId) {
+      for (var i = 0; i < todos.length; i++) {
+        if (todos[i].id === parseInt(todoId)) {
+          return todos[i];
+        }
+      }
+      return null;
+    }
+  }
+
+})
+
 .factory('Chats', function() {
   // Might use a resource here that returns a JSON array
 
