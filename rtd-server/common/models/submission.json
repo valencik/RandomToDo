@@ -1,0 +1,20 @@
+{
+  "name": "submission",
+  "plural": "submissions",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "properties": {
+    "medium": {
+      "type": "string",
+      "required": true
+    },
+    "resource": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": []
+}

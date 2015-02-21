@@ -8,7 +8,8 @@
     ]
   },
   "User": {
-    "dataSource": "db"
+    "dataSource": "db",
+    "public": false
   },
   "AccessToken": {
     "dataSource": "db",
@@ -25,5 +26,17 @@
   "Role": {
     "dataSource": "db",
     "public": false
+  },
+  "user": {
+    "dataSource": "db",
+    "public": true
+  },
+  "todo": {
+    "dataSource": "db",
+    "public": true
+  },
+  "submission": {
+    "dataSource": "db",
+    "public": true
   }
 }
