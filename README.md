@@ -1,4 +1,6 @@
 # RandomToDo
+
+[![Join the chat at https://gitter.im/valencik/RandomToDo](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/valencik/RandomToDo?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 Get random things done with everyone else in the world.
 
 # Running
