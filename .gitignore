@@ -1,3 +1,13 @@
+# Vim
+### https://raw.github.com/github/gitignore/c1cd9540de9f2513f3339f3132e707c69382be1d/Global/vim.gitignore
+
+[._]*.s[a-w][a-z]
+[._]s[a-w][a-z]
+*.un~
+Session.vim
+.netrwhist
+*~
+
 # Logs
 logs
 *.log
