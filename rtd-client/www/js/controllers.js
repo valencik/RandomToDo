@@ -1,7 +1,34 @@
 angular.module('starter')
 
-.controller('DashCtrl', ["$scope", "Todo", function($scope, Todo) {
-    $scope.todos = Todo.find();
+.controller('DashCtrl', ["$scope", "$rootScope", "Todo", function($scope,
+    $rootScope, Todo) {
+    $scope.todos = [];
+
+    function initScope() {
+        console.log('initScope');
+
+        Todo.find()
+            .$promise
+            .then(function(results) {
+                console.log(results);
+                $scope.todos = results;
+            });
+    }
+
+    initScope();
+
+    // $scope.$on('$routeChangeUpdate', initScope);
+    // $scope.$on('$routeChangeSuccess', initScope);
+    //
+    $rootScope.$on('$stateChangeStart',
+        function(event, toState, toParams, fromState,
+            fromParams) {
+            // event.preventDefault();
+            // transitionTo() promise will be rejected with
+            // a 'transition prevented' error
+            initScope();
+        })
+
 }])
 
 
@@ -16,9 +43,10 @@ angular.module('starter')
     });
 }])
 
-.controller('SubmissionCtrl', ["$scope", "$stateParams", "Todo", "Submission",
+.controller('SubmissionCtrl', ["$scope", "$state", "$stateParams", "Todo",
+    "Submission",
     "Message",
-    function($scope, $stateParams, Todo, Submission, Message) {
+    function($scope, $state, $stateParams, Todo, Submission, Message) {
         console.log("SubmissionCtrl");
 
         var submissionId = $stateParams.submissionId;
@@ -71,31 +99,61 @@ angular.module('starter')
             });
         };
 
+        $scope.deleteSubmission = function(submission) {
+            var todoId = $scope.submission.todoId;
+
+            Submission.deleteById({
+                    id: submission.id
+                })
+                .$promise
+                .then(function() {
+                    console.log('deleted');
+                    $state.go('todo.gallery', {
+                        todoId: todoId
+                    });
+                }, function() {
+                    console.log('not deleted');
+                    $state.go('todo.gallery', {
+                        todoId: todoId
+                    });
+                });
+        };
 
     }
 ])
 
-.controller('GalleryCtrl', ["$scope", "$stateParams", "Todo", "Submission",
-    function($scope, $stateParams, Todo, Submission) {
+.controller('GalleryCtrl', ["$scope", "$rootScope", "$stateParams", "Todo",
+    "Submission",
+    function($scope, $rootScope, $stateParams, Todo, Submission) {
 
         $scope.submissions = [];
 
         function initScope() {
+            console.log('initScope');
+
             Todo.submissions({
                     id: $stateParams.todoId
                 })
                 .$promise
                 .then(function(results) {
-                    // console.log(results);
+                    console.log(results);
                     $scope.submissions = results;
                 });
         }
 
         initScope();
 
-        $scope.$on('$routeChangeUpdate', initScope);
-        $scope.$on('$routeChangeSuccess', initScope);
-
+        // $scope.$on('$routeChangeUpdate', initScope);
+        // $scope.$on('$routeChangeSuccess', initScope);
+        //
+        $rootScope.$on('$stateChangeStart',
+            function(event, toState, toParams, fromState,
+                fromParams) {
+                // event.preventDefault();
+                // transitionTo() promise will be rejected with
+                // a 'transition prevented' error
+                initScope();
+            })
     }
 ])
 
@@ -110,22 +168,48 @@ angular.module('starter')
             "Audio"
         ];
 
+        $scope.fileData = "";
+
         $scope.submission = {
             caption: "Enter caption...",
             medium: $scope.mediums[0],
-            resource: "https://pbs.twimg.com/profile_images/491274378181488640/Tti0fFVJ.jpeg",
-            todoId: todoId
-        };
-
-        $scope.reset = function() {
-            console.log('reset');
+            resource: null, //"https://pbs.twimg.com/profile_images/491274378181488640/Tti0fFVJ.jpeg",
+            todoId: todoId,
         };
 
         $scope.save = function(submission) {
             console.log('submit', submission);
+            submission.resource = $scope.fileData;
             var record = Submission.create(submission);
-            record.$save();
+            record.$save()
+            .then(function(){
+                console.log('then', arguments);
+            },function(){
+                console.log('fail', arguments);
+            });
         };
+
+        $scope.storeFile =
+            function(el) {
+                console.log('storeFile', el);
+
+                var file = el.files[
+                    0];
+                var reader = new FileReader();
+
+                reader.onloadend = function() {
+                    console.log(reader.result);
+                    $scope.fileData = reader.result;
+                    // preview.src = reader.result;
+                    $scope.save($scope.submission);
+                }
+
+                if (file) {
+                    reader.readAsDataURL(file);
+                } else {
+                    // preview.src = "";
+                }
+            };
 
     }
 ])
@@ -146,12 +230,12 @@ angular.module('starter')
             .$save()
             .then(function() {
                 Todo.messages({
-                    id: $stateParams.todoId
-                })
-                .$promise
-                .then(function(result) {
-                    $scope.messages = result;
-                });
+                        id: $stateParams.todoId
+                    })
+                    .$promise
+                    .then(function(result) {
+                        $scope.messages = result;
+                    });
                 $scope.body = "";
             });
     };

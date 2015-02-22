@@ -33,7 +33,7 @@ The Friends service returns an array of friend data
 
             <label class="item item-input" ng-if="submission.medium == 'Photo'">
                 <span class="input-label">Upload Photo</span>
-                <input type="file" accept="image/*" />
+                <input type="file" accept="image/*" onchange="angular.element(this).scope().storeFile(this)" />
             </label>
 
             <label class="item item-input" ng-if="submission.medium == 'Video'">
@@ -48,7 +48,6 @@ The Friends service returns an array of friend data
 
             <label class="item item-input">
                 <span class="input-label">Ready to Submit?</span>
-                <input type="button" ng-click="reset()" value="No, Reset!" class="button button-light" />
                 <input type="submit" value="Yes, Save!" class="button button-light" />
             </label>
 
