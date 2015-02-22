@@ -1462,6 +1462,12 @@ module.factory(
           method: "PUT"
         },
 
+        // INTERNAL. Use Submission.todo() instead.
+        "::get::submission::todo": {
+          url: urlBase + "/submissions/:id/todo",
+          method: "GET"
+        },
+
         // INTERNAL. Use Message.todo() instead.
         "::get::message::todo": {
           url: urlBase + "/messages/:id/todo",
@@ -2158,6 +2164,12 @@ module.factory(
       { 'id': '@id' },
       {
 
+        // INTERNAL. Use Submission.todo() instead.
+        "prototype$__get__todo": {
+          url: urlBase + "/submissions/:id/todo",
+          method: "GET"
+        },
+
         /**
          * @ngdoc method
          * @name lbServices.Submission#create
@@ -2683,6 +2695,42 @@ module.factory(
     */
     R.modelName = "Submission";
 
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Submission#todo
+         * @methodOf lbServices.Submission
+         *
+         * @description
+         *
+         * Fetches belongsTo relation todo
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `refresh` – `{boolean=}` - 
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Todo` object.)
+         * </em>
+         */
+        R.todo = function() {
+          var TargetResource = $injector.get("Todo");
+          var action = TargetResource["::get::submission::todo"];
+          return action.apply(R, arguments);
+        };
 
     return R;
   }]);
