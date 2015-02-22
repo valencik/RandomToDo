@@ -1,25 +1,13 @@
 angular.module('starter')
 
 .controller('DashCtrl', ["$scope", "Todo", function($scope, Todo) {
-  $scope.todos = [];
-  Todo.find()
-    .$promise
-    .then(function(todos){
-      $scope.todos = todos;
-      //console.log($scope.todos);
-    });
+  $scope.todos = Todo.find();
 }])
 
 
 .controller('ChatsCtrl', ["$scope", "Message", function($scope, Message) {
 
-    $scope.chats = [];
-    Message.find()
-      .$promise
-      .then(function(records){
-        $scope.chats = records;
-        // console.log(records);
-      });
+    $scope.chats = Message.find();
 
 }])
 
@@ -28,18 +16,37 @@ angular.module('starter')
 }])
 
 .controller('GalleryCtrl', ["$scope", "Submission", function($scope, Submission) {
-    $scope.submissions = [];
-    Submission.find()
-      .$promise
-      .then(function(records){
-        $scope.submissions = records;
-        // console.log(records);
-      });
+    $scope.submissions = Submission.find()
 }])
 
 
-.controller('SubmitCtrl', ["$scope", "Submission", function($scope) {
-    // console.log($scope, $stateParams);
+.controller('SubmitCtrl', ["$scope", "$stateParams", "Todo", "Submission", function($scope, $stateParams, Todo, Submission) {
+
+    $scope.mediums = [
+        "Photo",
+        "Video",
+        "Audio"
+        ];
+
+    $scope.submission = {
+        caption: "Enter caption...",
+        medium: $scope.mediums[0],
+        resource: "https://pbs.twimg.com/profile_images/491274378181488640/Tti0fFVJ.jpeg"
+    };
+
+    $scope.reset = function(){
+        console.log('reset');
+
+    };
+
+    $scope.save = function(submission) {
+        console.log('submit', submission);
+        var record = Submission.create(submission);
+        record.$save();
+    };
+
+    $scope.todo = Todo.findById({"id": $stateParams.todoId });
+
 }])
 
 .controller('FeedCtrl', ["$scope", "Submission", function($scope, Submission) {
