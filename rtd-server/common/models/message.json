@@ -12,8 +12,13 @@
         "preserve": true
       }
     },
-    "todoId": "string",
-    "submissionId": "string",
+    "todoId": {
+      "type": "string",
+      "required": true
+    },
+    "submissionId": {
+      "type": "string"
+    },
     "body": {
       "type": "string",
       "required": true

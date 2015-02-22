@@ -23,10 +23,20 @@
     "resource": {
       "type": "string",
       "required": true
+    },
+    "todoId": {
+      "type": "string",
+      "required": true
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "todo": {
+      "type": "belongsTo",
+      "model": "todo",
+      "foreignKey": "todoId"
+    }
+  },
   "acls": [],
   "methods": []
 }
