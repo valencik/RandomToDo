@@ -1,10 +1,23 @@
+function cleanRecords(records) {
+  return records.map(function(item) {
+    return item.rtd;
+  });
+}
+
+function cleanRecord(record) {
+  return record.rtd;
+}
+
 angular.module('starter')
 
-.controller('DashCtrl', ["$scope", "Todos", function($scope, Todos) {
-  $scope.todos = Todos.all();
-    $scope.remove = function(todo) {
-    Todos.remove(todo);
-  }
+.controller('DashCtrl', ["$scope", "Todo", function($scope, Todo) {
+  $scope.todos = [];
+  Todo.find()
+    .$promise
+    .then(function(todos){
+      $scope.todos = cleanRecords(todos);
+      //console.log($scope.todos);
+    });
 }])
 
 
