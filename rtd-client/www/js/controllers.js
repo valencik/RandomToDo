@@ -52,12 +52,24 @@ angular.module('starter')
         record.$save();
     };
 
-    // $scope.todo = Todo.findById({"id": $stateParams.todoId });
-
 }])
 
-.controller('FeedCtrl', ["$scope", "$stateParams", "Todo", function($scope, $stateParams, Todo) {
+.controller('FeedCtrl', ["$scope", "$stateParams", "Todo", "Message", function($scope, $stateParams, Todo, Message) {
+    var todoId = $stateParams.todoId;
     $scope.messages = Todo.messages({id: $stateParams.todoId});
+
+    $scope.submitMessage = function(body) {
+
+        Message.create({
+            body: body,
+            todoId: todoId
+        })
+        .$save()
+        .then(function() {
+            $scope.messages = Todo.messages({id: $stateParams.todoId});
+            $scope.body = "";
+        });
+    };
 }])
 
 // .controller('FriendsCtrl', ["$scope", "Friends", function($scope, Friends) {

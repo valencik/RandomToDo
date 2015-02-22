@@ -10,7 +10,11 @@
     <div class="bar bar-foot item-input-inset">
       <label class="item-input-wrapper">
         <i class="icon ion-chatbox placeholder-icon"></i>
-        <input type="text" placeholder="Send a message">
+        <input ng-model="body" type="text"
+            ng-keypress="($event.which === 13)?submitMessage(body):0"
+            placeholder="Send a message"
+            />
+
       </label>
       <button class="button button-clear">
         Cancel
