@@ -1,0 +1,9 @@
+<ion-view view-title="Gallery">
+  <ion-content class="padding">
+  <div class="row responsive-lg">
+    <div class="col" ng-repeat="submission in submissions" ui-sref="tab.submission">
+      <img ng-src="{{submission.image}}">
+    </div>
+    </div>
+  </ion-content>
+</ion-view>

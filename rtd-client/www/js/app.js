@@ -63,6 +63,16 @@ angular.module('starter', ['ionic', 'lbServices'])
       }
     })
 
+  .state('tab.gallery', {
+      url: '/gallery',
+      views: {
+        'tab-gallery': {
+          templateUrl: 'templates/tab-gallery.html',
+          controller: 'GalleryCtrl'
+        }
+      }
+    })
+
   .state('tab.friends', {
       url: '/friends',
       views: {
