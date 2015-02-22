@@ -5,18 +5,14 @@
         <div class="card" ng-repeat="message in messages">
 
             <!-- Basic Message in Todo Feed -->
-            <div class="item item-text-wrap" href="#" ng-show="!message.submissionId">
+            <div class="item item-text-wrap" href="#" ng-hide="message.submissionId">
                 {{message.body}}
             </div>
 
             <!-- Comment on Submission -->
             <div ng-show="message.submissionId">
-                <div class="item item-image">
-                    <img src="{{submission.resource}}">
-                </div>
-
-                <a class="item item-icon-left assertive" href="#">
-                    <i class="icon ion-quote"></i> {{submission.caption}}
+                <a class="item item-icon-left assertive" ui-sref="todo.submission({ submissionId: message.submissionId })">
+                    <i class="icon ion-quote"></i> {{message.body}}
                 </a>
             </div>
 

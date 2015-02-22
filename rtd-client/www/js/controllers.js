@@ -1,7 +1,7 @@
 angular.module('starter')
 
 .controller('DashCtrl', ["$scope", "Todo", function($scope, Todo) {
-  $scope.todos = Todo.find();
+    $scope.todos = Todo.find();
 }])
 
 
@@ -11,66 +11,112 @@ angular.module('starter')
 
 }])
 
-.controller('TodoCtrl', ["$scope", "$stateParams", "Todo", function($scope, $stateParams, Todo) {
-  $scope.todo = Todo.findById({id: $stateParams.todoId });
+.controller('TodoCtrl', ["$scope", "$stateParams", "Todo", function($scope,
+    $stateParams, Todo) {
+    $scope.todo = Todo.findById({
+        id: $stateParams.todoId
+    });
 }])
 
-.controller('SubmissionCtrl', ["$scope", "$stateParams", "Todo", "Submission", function($scope, $stateParams, Todo, Submission) {
-  console.log("The SubmissionCtrl was called...");
-  $scope.submission = Submission.findById({id: $stateParams.submissionId });
-}])
+.controller('SubmissionCtrl', ["$scope", "$stateParams", "Todo", "Submission", "Message",
+    function($scope, $stateParams, Todo, Submission, Message) {
 
-.controller('GalleryCtrl', ["$scope", "$stateParams", "Todo", "Submission", function($scope, $stateParams, Todo, Submission) {
-    $scope.submissions = Todo.submissions({id: $stateParams.todoId});
-}])
+        var todoId = $stateParams.todoId;
+        var submissionId = $stateParams.submissionId;
+
+        $scope.submission = Submission.findById({
+            id: submissionId
+        });
+        $scope.messages = Submission.messages({
+            id: submissionId
+        });
+
+        $scope.submitMessage = function(body) {
+
+            Message.create({
+                    body: body,
+                    todoId: todoId,
+                    submissionId: submissionId
+                })
+                .$save()
+                .then(function() {
+                    $scope.messages = Submission.messages({
+                        id: submissionId
+                    });
+                    $scope.body = "";
+                });
+        };
 
 
-.controller('SubmitCtrl', ["$scope", "$stateParams", "Todo", "Submission", function($scope, $stateParams, Todo, Submission) {
+    }
+])
 
-    var todoId = $stateParams.todoId;
+.controller('GalleryCtrl', ["$scope", "$stateParams", "Todo", "Submission",
+    function($scope, $stateParams, Todo, Submission) {
+        $scope.submissions = Todo.submissions({
+            id: $stateParams.todoId
+        });
+    }
+])
 
-    $scope.mediums = [
-        "Photo",
-        "Video",
-        "Audio"
+
+.controller('SubmitCtrl', ["$scope", "$stateParams", "Todo", "Submission",
+    function($scope, $stateParams, Todo, Submission) {
+
+        var todoId = $stateParams.todoId;
+
+        $scope.mediums = [
+            "Photo",
+            "Video",
+            "Audio"
         ];
 
-    $scope.submission = {
-        caption: "Enter caption...",
-        medium: $scope.mediums[0],
-        resource: "https://pbs.twimg.com/profile_images/491274378181488640/Tti0fFVJ.jpeg",
-        todoId: todoId
-    };
+        $scope.submission = {
+            caption: "Enter caption...",
+            medium: $scope.mediums[0],
+            resource: "https://pbs.twimg.com/profile_images/491274378181488640/Tti0fFVJ.jpeg",
+            todoId: todoId
+        };
 
-    $scope.reset = function(){
-        console.log('reset');
+        $scope.reset = function() {
+            console.log('reset');
 
-    };
+        };
 
-    $scope.save = function(submission) {
-        console.log('submit', submission);
-        var record = Submission.create(submission);
-        record.$save();
-    };
+        $scope.save = function(submission) {
+            console.log('submit', submission);
+            var record = Submission.create(submission);
+            record.$save();
+        };
 
-}])
+    }
+])
 
-.controller('FeedCtrl', ["$scope", "$stateParams", "Todo", "Message", function($scope, $stateParams, Todo, Message) {
+.controller('FeedCtrl', ["$scope", "$stateParams", "Todo", "Message", function(
+    $scope, $stateParams, Todo, Message) {
     var todoId = $stateParams.todoId;
-    $scope.messages = Todo.messages({id: $stateParams.todoId});
-    
+    $scope.messages = Todo.messages({
+        id: $stateParams.todoId
+    });
+
     $scope.submitMessage = function(body) {
 
         Message.create({
-            body: body,
-            todoId: todoId
-        })
-        .$save()
-        .then(function() {
-            $scope.messages = Todo.messages({id: $stateParams.todoId});
-            $scope.body = "";
-        });
+                body: body,
+                todoId: todoId
+            })
+            .$save()
+            .then(function() {
+                $scope.messages = Todo.messages({
+                    id: $stateParams.todoId
+                });
+                $scope.body = "";
+            });
     };
+
+    $scope.submissionForMessage = function(message) {
+        return Message.submission({id: message.id});
+    }
 
 }])
 

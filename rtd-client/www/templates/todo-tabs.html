@@ -4,8 +4,6 @@ Each tab's child <ion-nav-view> directive will have its own
 navigation history that also transitions its views in and out.
 -->
 
-<div ui-view></div>
-
 <ion-tabs class="tabs-icon-top tabs-color-active-positive">
 
   <!-- Dashboard Tab -->
@@ -23,9 +21,15 @@ navigation history that also transitions its views in and out.
     <ion-nav-view name="todo-feed"></ion-nav-view>
   </ion-tab>
 
-  <!-- Submission Tab -->
+  <!-- Submit Tab -->
   <ion-tab title="Submit" icon-off="ion-ios7-cloud-upload-outline" icon-on="ion-ios7-cloud-upload" ui-sref="todo.submit">
     <ion-nav-view name="todo-submit"></ion-nav-view>
   </ion-tab>
+
+  <!-- Submissions Tab -->
+  <ion-tab title="Submissions" icon-off="ion-ios7-cloud-upload-outline" icon-on="ion-ios7-cloud-upload" ui-sref="todo.submission">
+    <ion-nav-view name="todo-submission"></ion-nav-view>
+  </ion-tab>
+
 
 </ion-tabs>

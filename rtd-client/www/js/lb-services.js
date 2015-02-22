@@ -2546,6 +2546,49 @@ module.factory(
           method: "GET"
         },
 
+        // INTERNAL. Use Submission.messages.findById() instead.
+        "prototype$__findById__messages": {
+          url: urlBase + "/submissions/:id/messages/:fk",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Submission.messages.destroyById() instead.
+        "prototype$__destroyById__messages": {
+          url: urlBase + "/submissions/:id/messages/:fk",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Submission.messages.updateById() instead.
+        "prototype$__updateById__messages": {
+          url: urlBase + "/submissions/:id/messages/:fk",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use Submission.messages() instead.
+        "prototype$__get__messages": {
+          isArray: true,
+          url: urlBase + "/submissions/:id/messages",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Submission.messages.create() instead.
+        "prototype$__create__messages": {
+          url: urlBase + "/submissions/:id/messages",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Submission.messages.destroyAll() instead.
+        "prototype$__delete__messages": {
+          url: urlBase + "/submissions/:id/messages",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Submission.messages.count() instead.
+        "prototype$__count__messages": {
+          url: urlBase + "/submissions/:id/messages/count",
+          method: "GET"
+        },
+
         /**
          * @ngdoc method
          * @name lbServices.Submission#create
@@ -3107,6 +3150,269 @@ module.factory(
           var action = TargetResource["::get::submission::todo"];
           return action.apply(R, arguments);
         };
+    /**
+     * @ngdoc object
+     * @name lbServices.Submission.messages
+     * @header lbServices.Submission.messages
+     * @object
+     * @description
+     *
+     * The object `Submission.messages` groups methods
+     * manipulating `Message` instances related to `Submission`.
+     *
+     * Call {@link lbServices.Submission#messages Submission.messages()}
+     * to query all related instances.
+     */
+
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Submission#messages
+         * @methodOf lbServices.Submission
+         *
+         * @description
+         *
+         * Queries messages of submission.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `filter` – `{object=}` - 
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Message` object.)
+         * </em>
+         */
+        R.messages = function() {
+          var TargetResource = $injector.get("Message");
+          var action = TargetResource["::get::submission::messages"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Submission.messages#count
+         * @methodOf lbServices.Submission.messages
+         *
+         * @description
+         *
+         * Counts messages of submission.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `where` – `{object=}` - Criteria to match model instances
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Data properties:
+         *
+         *  - `count` – `{number=}` - 
+         */
+        R.messages.count = function() {
+          var TargetResource = $injector.get("Message");
+          var action = TargetResource["::count::submission::messages"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Submission.messages#create
+         * @methodOf lbServices.Submission.messages
+         *
+         * @description
+         *
+         * Creates a new instance in messages of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Message` object.)
+         * </em>
+         */
+        R.messages.create = function() {
+          var TargetResource = $injector.get("Message");
+          var action = TargetResource["::create::submission::messages"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Submission.messages#destroyAll
+         * @methodOf lbServices.Submission.messages
+         *
+         * @description
+         *
+         * Deletes all messages of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R.messages.destroyAll = function() {
+          var TargetResource = $injector.get("Message");
+          var action = TargetResource["::delete::submission::messages"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Submission.messages#destroyById
+         * @methodOf lbServices.Submission.messages
+         *
+         * @description
+         *
+         * Delete a related item by id for messages
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for messages
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R.messages.destroyById = function() {
+          var TargetResource = $injector.get("Message");
+          var action = TargetResource["::destroyById::submission::messages"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Submission.messages#findById
+         * @methodOf lbServices.Submission.messages
+         *
+         * @description
+         *
+         * Find a related item by id for messages
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for messages
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Message` object.)
+         * </em>
+         */
+        R.messages.findById = function() {
+          var TargetResource = $injector.get("Message");
+          var action = TargetResource["::findById::submission::messages"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Submission.messages#updateById
+         * @methodOf lbServices.Submission.messages
+         *
+         * @description
+         *
+         * Update a related item by id for messages
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for messages
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Message` object.)
+         * </em>
+         */
+        R.messages.updateById = function() {
+          var TargetResource = $injector.get("Message");
+          var action = TargetResource["::updateById::submission::messages"];
+          return action.apply(R, arguments);
+        };
 
     return R;
   }]);
@@ -3529,6 +3835,49 @@ module.factory(
         // INTERNAL. Use Todo.messages.count() instead.
         "::count::todo::messages": {
           url: urlBase + "/todos/:id/messages/count",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Submission.messages.findById() instead.
+        "::findById::submission::messages": {
+          url: urlBase + "/submissions/:id/messages/:fk",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Submission.messages.destroyById() instead.
+        "::destroyById::submission::messages": {
+          url: urlBase + "/submissions/:id/messages/:fk",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Submission.messages.updateById() instead.
+        "::updateById::submission::messages": {
+          url: urlBase + "/submissions/:id/messages/:fk",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use Submission.messages() instead.
+        "::get::submission::messages": {
+          isArray: true,
+          url: urlBase + "/submissions/:id/messages",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Submission.messages.create() instead.
+        "::create::submission::messages": {
+          url: urlBase + "/submissions/:id/messages",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Submission.messages.destroyAll() instead.
+        "::delete::submission::messages": {
+          url: urlBase + "/submissions/:id/messages",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Submission.messages.count() instead.
+        "::count::submission::messages": {
+          url: urlBase + "/submissions/:id/messages/count",
           method: "GET"
         },
       }
