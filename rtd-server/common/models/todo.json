@@ -4,6 +4,14 @@
   "base": "PersistedModel",
   "idInjection": true,
   "properties": {
+    "id": {
+      "type": "string",
+      "id": true,
+      "index": true,
+      "couchbase": {
+        "preserve": true
+      }
+    },
     "title": {
       "type": "string",
       "required": true
@@ -16,20 +24,26 @@
         "string"
       ],
       "required": true
+    },
+    "todoId": {
+      "type": "string"
+    },
+    "submissionId": {
+      "type": "string"
     }
   },
   "validations": [],
   "relations": {
-      "messages": {
-          "type": "hasMany",
-          "model": "message",
-          "foreignKey": "todoId"
-      },
-      "submissions": {
-          "type": "hasMany",
-          "model": "submission",
-          "foreignKey": "submissionId"
-      }
+    "messages": {
+      "type": "hasMany",
+      "model": "message",
+      "foreignKey": "todoId"
+    },
+    "submissions": {
+      "type": "hasMany",
+      "model": "submission",
+      "foreignKey": "submissionId"
+    }
   },
   "acls": [],
   "methods": []

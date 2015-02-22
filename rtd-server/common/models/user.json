@@ -3,7 +3,17 @@
   "plural": "users",
   "base": "User",
   "idInjection": true,
-  "properties": {},
+  "properties": {
+    "id": {
+      "type": "String",
+      "id": true,
+      "required": true,
+      "index": true,
+      "couchbase": {
+        "preserve": true
+      }
+    }
+  },
   "validations": [],
   "relations": {},
   "acls": [],

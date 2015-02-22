@@ -4,6 +4,16 @@
   "base": "PersistedModel",
   "idInjection": true,
   "properties": {
+    "id": {
+      "type": "String",
+      "id": true,
+      "required": true,
+      "index": true,
+      "couchbase": {
+        "preserve": true
+      }
+    },
+
     "medium": {
       "type": "string",
       "required": true
