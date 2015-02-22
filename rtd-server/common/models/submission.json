@@ -5,18 +5,17 @@
   "idInjection": true,
   "properties": {
     "id": {
-      "type": "String",
+      "type": "string",
       "id": true,
-      "required": true,
       "index": true,
       "couchbase": {
         "preserve": true
       }
     },
     "caption": {
-        "type": "string",
-        "required": true
-    }
+      "type": "string",
+      "required": true
+    },
     "medium": {
       "type": "string",
       "required": true
