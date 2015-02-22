@@ -1,3 +1,28 @@
+# Mac files
+### https://raw.github.com/github/gitignore/c1cd9540de9f2513f3339f3132e707c69382be1d/Global/osx.gitignore
+
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Icon must end with two \r
+Icon
+
+# Thumbnails
+._*
+
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+
 # Vim
 ### https://raw.github.com/github/gitignore/c1cd9540de9f2513f3339f3132e707c69382be1d/Global/vim.gitignore
 
