@@ -1,6 +1,6 @@
 <ion-view view-title="Dashboard">
   <ion-content class="padding">
-    <div class="list card" ng-repeat="todo in todos" ui-sref="tab.friends">
+    <div class="list card" ng-repeat="todo in todos" ui-sref="todo.gallery({ todoId: todo.id })">
       <div class="item item-divider">{{todo.title}}</div>
       <div class="item item-body">
         <div>
