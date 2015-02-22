@@ -29,25 +29,21 @@ angular.module('starter', ['ionic', 'lbServices'])
   // Each state's controller can be found in controllers.js
   $stateProvider
 
+  // setup the home dashboard
+  .state('dash', {
+    url: "/dash",
+    templateUrl: "templates/tab-dash.html",
+    controller: 'DashCtrl'
+  })
+
   // setup an abstract state for the tabs directive
-    .state('tab', {
+  .state('tab', {
     url: "/tab",
     abstract: true,
     templateUrl: "templates/tabs.html"
   })
 
   // Each tab has its own nav history stack:
-
-  .state('tab.dash', {
-    url: '/dash',
-    views: {
-      'tab-dash': {
-        templateUrl: 'templates/tab-dash.html',
-        controller: 'DashCtrl'
-      }
-    }
-  })
-
   .state('tab.chats', {
       url: '/chats',
       views: {
@@ -97,7 +93,7 @@ angular.module('starter', ['ionic', 'lbServices'])
   });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/dash');
+  $urlRouterProvider.otherwise('/dash');
 
   // Change the URL where to access the LoopBack REST API server    
   LoopBackResourceProvider.setUrlBase('http://172.21.44.141:3000/api');
