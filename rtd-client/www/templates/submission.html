@@ -1,9 +1,10 @@
 <ion-view view-title="{{submission.caption}}">
 
-    <ion-nav-buttons side="left">
-        <a class="button" ui-sref="todo.gallery({todoId: todo.id})">
-            <i class="icon ion-clipboard"></i> Back to Todo
-        </a>
+    <ion-nav-buttons side="left"
+        class="button-clear">
+        <div ui-sref="todo.gallery({todoId: todo.id})">
+            <i class="ion-arrow-left-c"></i> <i class="icon ion-clipboard"></i> {{todo.title}}
+        </div>
     </ion-nav-buttons>
 
     <ion-content class="padding">
@@ -32,10 +33,10 @@
         <div class="bar bar-foot item-input-inset">
             <label class="item-input-wrapper">
                 <i class="icon ion-chatbox placeholder-icon"></i>
-                <input ng-model="body" type="text" ng-keypress="($event.which === 13)?submitMessage(body):0" placeholder="Send a message" />
+                <input ng-model="body" type="text" placeholder="Send a message" id="submission-comment"/>
             </label>
-            <button class="button button-clear">
-                Cancel
+            <button class="button" ng-click="submitMessage(body)">
+                Submit
             </button>
         </div>
 

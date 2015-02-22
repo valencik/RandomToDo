@@ -16,7 +16,8 @@ angular.module('starter')
     });
 }])
 
-.controller('SubmissionCtrl', ["$scope", "$stateParams", "Todo", "Submission", "Message",
+.controller('SubmissionCtrl', ["$scope", "$stateParams", "Todo", "Submission",
+    "Message",
     function($scope, $stateParams, Todo, Submission, Message) {
         console.log("SubmissionCtrl");
 
@@ -25,31 +26,49 @@ angular.module('starter')
         $scope.submission = Submission.findById({
             id: submissionId
         });
-        $scope.messages = Submission.messages({
-            id: submissionId
-        });
+        $scope.messages = [];
+
+        Submission.messages({
+                id: submissionId
+            })
+            .$promise
+            .then(function(messages) {
+                $scope.messages = messages;
+            });
 
         $scope.todo = Submission.todo({
             id: submissionId
         });
 
-
         $scope.submitMessage = function(body) {
 
-            var todoId = $scope.todo.todoId;
+            console.log(body, $scope.submission);
+
+            var todoId = $scope.submission.todoId;
+
+            console.log(todoId);
 
             Message.create({
-                    body: body,
-                    todoId: todoId,
-                    submissionId: submissionId
-                })
-                .$save()
-                .then(function() {
-                    $scope.messages = Submission.messages({
+                body: body,
+                todoId: todoId,
+                submissionId: submissionId
+            }, function() {
+                console.log('save finished');
+
+                // clear field
+                $scope.body = "";
+                document.getElementById(
+                    'submission-comment').value = '';
+
+                Submission.messages({
                         id: submissionId
+                    })
+                    .$promise
+                    .then(function(messages) {
+                        $scope.messages = messages;
                     });
-                    $scope.body = "";
-                });
+
+            });
         };
 
 
@@ -58,9 +77,25 @@ angular.module('starter')
 
 .controller('GalleryCtrl', ["$scope", "$stateParams", "Todo", "Submission",
     function($scope, $stateParams, Todo, Submission) {
-        $scope.submissions = Todo.submissions({
-            id: $stateParams.todoId
-        });
+
+        $scope.submissions = [];
+
+        function initScope() {
+            Todo.submissions({
+                    id: $stateParams.todoId
+                })
+                .$promise
+                .then(function(results) {
+                    // console.log(results);
+                    $scope.submissions = results;
+                });
+        }
+
+        initScope();
+
+        $scope.$on('$routeChangeUpdate', initScope);
+        $scope.$on('$routeChangeSuccess', initScope);
+
     }
 ])
 
@@ -110,16 +145,22 @@ angular.module('starter')
             })
             .$save()
             .then(function() {
-                $scope.messages = Todo.messages({
+                Todo.messages({
                     id: $stateParams.todoId
+                })
+                .$promise
+                .then(function(result) {
+                    $scope.messages = result;
                 });
                 $scope.body = "";
             });
     };
 
     $scope.submissionForMessage = function(message) {
-        return Message.submission({id: message.id});
-    }
+        return Message.submission({
+            id: message.id
+        });
+    };
 
 }])
 

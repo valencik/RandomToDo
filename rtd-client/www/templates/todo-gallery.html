@@ -1,10 +1,11 @@
 <ion-view view-title="Gallery for '{{todo.title}}'">
 
-    <ion-nav-buttons side="back">
-        <a class="button" ui-sref="dash">
-            <i class="icon ion-clipboard"></i> Todo
-        </a>
+    <ion-nav-buttons side="left" class="button-clear">
+        <div ui-sref="dash">
+            <i class="ion-arrow-left-c"></i> <i class="icon ion-clipboard"></i> Todo
+        </div>
     </ion-nav-buttons>
+
 
     <ion-content class="padding">
 
@@ -24,38 +25,21 @@
 
         </div>
 
-        <div ng-repeat="submission in submissions" class="list card"
-            ui-sref="submission({ submissionId: submissions[$index].id })">
+        <div ng-repeat="submission in submissions" class="list card" ui-sref="submission({ submissionId: submissions[$index].id })">
 
-              <div class="item item-avatar">
+            <div class="item item-avatar">
                 <img src="{{submission.resource}}">
                 <h2>{{submission.caption}}</h2>
                 <p>{{submission.caption}}</p>
-              </div>
-
-              <div class="item item-image">
-                <img src="{{submission.resource}}">
-              </div>
-
-              <p class="item item-icon-left assertive">
-                <i class="icon ion-music-note"></i>
-                See Comments
-              </p>
-
-            <!--
-            <div class="row responsive-sm" ng-if="$even">
-
-                <div class="col-50" ui-sref="submission({ submissionId: submissions[$index].id })" style="text-align: center;">
-                    <img ng-src="{{submissions[$index].resource}}" width="300">
-                </div>
-
-                <div ng-show="submissions.length > $index+1"
-                    class="col-50" ui-sref="submission({ submissionId: submissions[$index+1].id })" style="text-align: center;">
-                    <img ng-src="{{submissions[$index+1].resource}}" width="300">
-                </div>
-
             </div>
-            -->
+
+            <div class="item item-image">
+                <img src="{{submission.resource}}">
+            </div>
+
+            <p class="item item-icon-left assertive">
+                <i class="icon ion-music-note"></i> See Comments
+            </p>
 
         </div>
 
