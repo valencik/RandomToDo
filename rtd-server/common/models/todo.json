@@ -19,7 +19,18 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+      "messages": {
+          "type": "hasMany",
+          "model": "message",
+          "foreignKey": "todoId"
+      },
+      "submissions": {
+          "type": "hasMany",
+          "model": "submission",
+          "foreignKey": "submissionId"
+      }
+  },
   "acls": [],
   "methods": []
 }

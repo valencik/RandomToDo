@@ -71,5 +71,5 @@ See http://127.0.0.1:3000/explorer
 Run in `rtd-server/`:
 
 ```bash
-lb-ng server/server.js client/lb-services.js
+lb-ng server/server.js ../rtd-client/www/js/lb-services.js
 ```

@@ -21,11 +21,16 @@ angular.module('starter')
 }])
 
 
-.controller('ChatsCtrl', ["$scope", "Chats", function($scope, Chats) {
-  $scope.chats = Chats.all();
-  $scope.remove = function(chat) {
-    Chats.remove(chat);
-  }
+.controller('ChatsCtrl', ["$scope", "Message", function($scope, Message) {
+
+    $scope.chats = [];
+    Message.find()
+      .$promise
+      .then(function(records){
+        $scope.chats = cleanRecords(records);
+        // console.log(records);
+      });
+
 }])
 
 .controller('ChatDetailCtrl', ["$scope", "Chats", function($scope, $stateParams, Chats) {
