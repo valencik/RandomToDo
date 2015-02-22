@@ -40,7 +40,8 @@ angular.module('starter', ['ionic', 'lbServices'])
     // setup the main todo state with tabs
     .state('todo', {
         url: "/todo/:todoId",
-        templateUrl: "templates/todo-tabs.html"
+        templateUrl: "templates/todo-tabs.html",
+        controller: 'TodoCtrl'
     })
 
     .state('todo.gallery', {

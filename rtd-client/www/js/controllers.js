@@ -11,16 +11,22 @@ angular.module('starter')
 
 }])
 
+.controller('TodoCtrl', ["$scope", "$stateParams", "Todo", function($scope, $stateParams, Todo) {
+  $scope.todo = Todo.findById({id: $stateParams.todoId });
+}])
+
 .controller('ChatDetailCtrl', ["$scope", "Chats", function($scope, $stateParams, Chats) {
   $scope.chat = Chats.get($stateParams.chatId);
 }])
 
-.controller('GalleryCtrl', ["$scope", "Submission", function($scope, Submission) {
-    $scope.submissions = Submission.find()
+.controller('GalleryCtrl', ["$scope", "$stateParams", "Todo", "Submission", function($scope, $stateParams, Todo, Submission) {
+    $scope.submissions = Todo.submissions({id: $stateParams.todoId});
 }])
 
 
 .controller('SubmitCtrl', ["$scope", "$stateParams", "Todo", "Submission", function($scope, $stateParams, Todo, Submission) {
+
+    var todoId = $stateParams.todoId;
 
     $scope.mediums = [
         "Photo",
@@ -31,7 +37,8 @@ angular.module('starter')
     $scope.submission = {
         caption: "Enter caption...",
         medium: $scope.mediums[0],
-        resource: "https://pbs.twimg.com/profile_images/491274378181488640/Tti0fFVJ.jpeg"
+        resource: "https://pbs.twimg.com/profile_images/491274378181488640/Tti0fFVJ.jpeg",
+        todoId: todoId
     };
 
     $scope.reset = function(){
@@ -45,18 +52,12 @@ angular.module('starter')
         record.$save();
     };
 
-    $scope.todo = Todo.findById({"id": $stateParams.todoId });
+    // $scope.todo = Todo.findById({"id": $stateParams.todoId });
 
 }])
 
-.controller('FeedCtrl', ["$scope", "Submission", function($scope, Submission) {
-    $scope.submissions = [];
-    Submission.find()
-      .$promise
-      .then(function(records){
-        $scope.submissions = records;
-        // console.log(records);
-      });
+.controller('FeedCtrl', ["$scope", "$stateParams", "Todo", function($scope, $stateParams, Todo) {
+    $scope.messages = Todo.messages({id: $stateParams.todoId});
 }])
 
 // .controller('FriendsCtrl', ["$scope", "Friends", function($scope, Friends) {
