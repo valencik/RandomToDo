@@ -27,20 +27,35 @@ angular.module('starter')
   $scope.chat = Chats.get($stateParams.chatId);
 }])
 
-.controller('GalleryCtrl', ["$scope", "Submissions", function($scope, Submissions) {
-  $scope.submissions = Submissions.all();
+.controller('GalleryCtrl', ["$scope", "Submission", function($scope, Submission) {
+    $scope.submissions = [];
+    Submission.find()
+      .$promise
+      .then(function(records){
+        $scope.submissions = records;
+        // console.log(records);
+      });
 }])
 
-.controller('FriendsCtrl', ["$scope", "Friends", function($scope, Friends) {
-  $scope.friends = Friends.all();
+
+.controller('SubmitCtrl', ["$scope", "Submission", function($scope) {
+    // console.log($scope, $stateParams);
 }])
 
-.controller('FriendDetailCtrl', ["$scope", "Friends", function($scope, $stateParams, Friends) {
-  $scope.friend = Friends.get($stateParams.friendId);
+.controller('FeedCtrl', ["$scope", "Submission", function($scope, Message) {
+
 }])
 
-.controller('AccountCtrl', ["$scope", function($scope) {
-  $scope.settings = {
-    enableFriends: true
-  };
-}]);
+// .controller('FriendsCtrl', ["$scope", "Friends", function($scope, Friends) {
+//   $scope.friends = Friends.all();
+// }])
+//
+// .controller('FriendDetailCtrl', ["$scope", "Friends", function($scope, $stateParams, Friends) {
+//   $scope.friend = Friends.get($stateParams.friendId);
+// }])
+//
+// .controller('AccountCtrl', ["$scope", function($scope) {
+//   $scope.settings = {
+//     enableFriends: true
+//   };
+// }]);

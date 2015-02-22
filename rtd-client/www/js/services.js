@@ -94,39 +94,39 @@ angular.module('starter')
   }
 })
 
-/**
- * A simple example service that returns some data.
- */
-.factory('Submissions', function() {
-  // Might use a resource here that returns a JSON array
-
-  // Some fake testing data
-  var submissions = [{
-    id: 0,
-    name: 'Andrew Valencik',
-    image: 'https://avatars2.githubusercontent.com/u/5440389?v=3&s=400'
-  }, {
-    id: 1,
-    name: 'Glavin Wiechert',
-    image: 'https://avatars2.githubusercontent.com/u/1885333?v=3&s=400'
-  }, {
-    id: 2,
-    name: 'Damien Robertson',
-    image: 'https://avatars3.githubusercontent.com/u/6467801?v=3&s=400'
-  }, {
-    id: 3,
-    name: 'Dawson Reid',
-    image: 'https://avatars1.githubusercontent.com/u/1885328?v=3&s=400'
-  }];
-
-
-  return {
-    all: function() {
-      return submissions;
-    },
-    get: function(submissionId) {
-      // Simple index lookup
-      return submissions[submissionId];
-    }
-  }
-});
+// /**
+//  * A simple example service that returns some data.
+//  */
+// .factory('Submissions', function() {
+//   // Might use a resource here that returns a JSON array
+//
+//   // Some fake testing data
+//   var submissions = [{
+//     id: 0,
+//     name: 'Andrew Valencik',
+//     image: 'https://avatars2.githubusercontent.com/u/5440389?v=3&s=400'
+//   }, {
+//     id: 1,
+//     name: 'Glavin Wiechert',
+//     image: 'https://avatars2.githubusercontent.com/u/1885333?v=3&s=400'
+//   }, {
+//     id: 2,
+//     name: 'Damien Robertson',
+//     image: 'https://avatars3.githubusercontent.com/u/6467801?v=3&s=400'
+//   }, {
+//     id: 3,
+//     name: 'Dawson Reid',
+//     image: 'https://avatars1.githubusercontent.com/u/1885328?v=3&s=400'
+//   }];
+//
+//
+//   return {
+//     all: function() {
+//       return submissions;
+//     },
+//     get: function(submissionId) {
+//       // Simple index lookup
+//       return submissions[submissionId];
+//     }
+//   }
+// });

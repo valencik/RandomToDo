@@ -13,7 +13,10 @@
         "preserve": true
       }
     },
-
+    "caption": {
+        "type": "string",
+        "required": true
+    }
     "medium": {
       "type": "string",
       "required": true
