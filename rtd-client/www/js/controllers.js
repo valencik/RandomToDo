@@ -57,7 +57,7 @@ angular.module('starter')
 .controller('FeedCtrl', ["$scope", "$stateParams", "Todo", "Message", function($scope, $stateParams, Todo, Message) {
     var todoId = $stateParams.todoId;
     $scope.messages = Todo.messages({id: $stateParams.todoId});
-
+    
     $scope.submitMessage = function(body) {
 
         Message.create({
