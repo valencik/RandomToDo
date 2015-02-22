@@ -1,5 +1,10 @@
 <ion-view view-title="Gallery">
   <ion-content class="padding">
+
+    <div ng-if="submissions.length == 0">
+        There are no submissions! <a ui-sref="todo.submit">Submit your own!</a>
+    </div>
+
     <div ng-repeat="submission in submissions">
       <div class="row responsive-sm" ng-if="$even">
 
@@ -12,5 +17,6 @@
 
       </div>
     </div>
+
   </ion-content>
 </ion-view>
