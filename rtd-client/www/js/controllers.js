@@ -58,6 +58,7 @@ angular.module('starter')
 
 .controller('FeedCtrl', ["$scope", "$stateParams", "Todo", function($scope, $stateParams, Todo) {
     $scope.messages = Todo.messages({id: $stateParams.todoId});
+    $scope.submissions = Todo.submissions({id: $stateParams.todoId});
 }])
 
 // .controller('FriendsCtrl', ["$scope", "Friends", function($scope, Friends) {

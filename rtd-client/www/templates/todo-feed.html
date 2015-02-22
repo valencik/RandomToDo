@@ -7,6 +7,19 @@
       </div>
     </div>
 
+    <div class="list card" ng-repeat="submission in submissions">
+
+      <div class="item item-image">
+        <img src="{{submission.resource}}">
+      </div>
+
+      <a class="item item-icon-left assertive" href="#">
+        <i class="icon ion-quote"></i>
+        {{submission.caption}}
+      </a>
+
+    </div>
+
     <div class="bar bar-foot item-input-inset">
       <label class="item-input-wrapper">
         <i class="icon ion-chatbox placeholder-icon"></i>
