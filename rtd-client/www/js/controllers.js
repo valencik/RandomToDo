@@ -42,8 +42,14 @@ angular.module('starter')
     // console.log($scope, $stateParams);
 }])
 
-.controller('FeedCtrl', ["$scope", "Submission", function($scope, Message) {
-
+.controller('FeedCtrl', ["$scope", "Submission", function($scope, Submission) {
+    $scope.submissions = [];
+    Submission.find()
+      .$promise
+      .then(function(records){
+        $scope.submissions = records;
+        // console.log(records);
+      });
 }])
 
 // .controller('FriendsCtrl', ["$scope", "Friends", function($scope, Friends) {
