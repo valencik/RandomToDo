@@ -40,7 +40,8 @@ angular.module('starter', ['ionic', 'lbServices'])
     // setup an abstract state for the tabs directive
     .state('todo', {
         url: "/todo/:todoId",
-        templateUrl: "templates/todo-tabs.html"
+        templateUrl: "templates/todo-tabs.html",
+        controller: 'TodoCtrl'
     })
 
     .state('todo.gallery', {

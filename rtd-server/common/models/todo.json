@@ -24,12 +24,6 @@
         "string"
       ],
       "required": true
-    },
-    "todoId": {
-      "type": "string"
-    },
-    "submissionId": {
-      "type": "string"
     }
   },
   "validations": [],
@@ -42,7 +36,7 @@
     "submissions": {
       "type": "hasMany",
       "model": "submission",
-      "foreignKey": "submissionId"
+      "foreignKey": "todoId"
     }
   },
   "acls": [],
