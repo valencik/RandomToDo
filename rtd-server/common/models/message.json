@@ -1,0 +1,27 @@
+{
+  "name": "message",
+  "plural": "messages",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "properties": {
+    "body": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+      "submission": {
+          "type": "belongsTo",
+          "model": "submission",
+          "foreignKey": "submissionId"
+      },
+      "todo": {
+          "type": "belongsTo",
+          "model": "todo",
+          "foreignKey": "todoId"
+      }
+  },
+  "acls": [],
+  "methods": []
+}

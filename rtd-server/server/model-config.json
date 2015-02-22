@@ -38,5 +38,9 @@
   "submission": {
     "dataSource": "db",
     "public": true
+  },
+  "message": {
+    "dataSource": "db",
+    "public": true
   }
 }

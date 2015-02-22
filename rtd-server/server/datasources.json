@@ -4,13 +4,13 @@
     "connector": "memory"
   },
   "db": {
-    "name": "db",
-    "connector": "couchbase",
     "host": "127.0.0.1",
     "port": 8091,
-    "password": "glavin",
-    "n1qlport": 8093,
     "database": "rtd",
+    "password": "glavin",
+    "name": "db",
+    "connector": "couchbase",
+    "n1qlport": 8093,
     "connectionTimeout": 20000,
     "operationTimeout": 15000
   }
