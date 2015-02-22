@@ -1,23 +1,5 @@
-<ion-view view-title="Feed">
+<ion-view view-title="Feed for '{{todo.title}}'">
   <ion-content>
-
-    <div class="card">
-      <div class="item item-text-wrap" href="#">
-        Oldest message.
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="item item-text-wrap" href="#">
-        How are you?.
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="item item-text-wrap" href="#">
-        I'm good.
-      </div>
-    </div>
 
     <div class="card" ng-repeat="message in submissions">
       <div class="item item-text-wrap" href="#">
