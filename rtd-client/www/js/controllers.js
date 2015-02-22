@@ -157,8 +157,8 @@ angular.module('starter')
     }
 ])
 
-.controller('SubmitCtrl', ["$scope", "$stateParams", "Todo", "Submission",
-    function($scope, $stateParams, Todo, Submission) {
+.controller('SubmitCtrl', ["$scope", "$stateParams", "$state", "$cordovaCamera", "Todo", "Submission",
+    function($scope, $stateParams, $state, $cordovaCamera, Todo, Submission) {
 
         var todoId = $stateParams.todoId;
 
@@ -171,45 +171,77 @@ angular.module('starter')
         $scope.fileData = "";
 
         $scope.submission = {
-            caption: "Enter caption...",
+            caption: "",
             medium: $scope.mediums[0],
             resource: null, //"https://pbs.twimg.com/profile_images/491274378181488640/Tti0fFVJ.jpeg",
             todoId: todoId,
         };
 
         $scope.save = function(submission) {
-            console.log('submit', submission);
-            submission.resource = $scope.fileData;
-            var record = Submission.create(submission);
-            record.$save()
-            .then(function(){
-                console.log('then', arguments);
-            },function(){
-                console.log('fail', arguments);
+            // console.log('submit', submission);
+
+            // submission.resource = $scope.fileData;
+            var record = Submission.create(submission)
+            .$promise
+            .then(function(result){
+                console.log('then', JSON.stringify(result));
+
+                $state.go('submission', {
+                    submissionId: result.id
+                });
+
+            },function(error) {
+                console.log('fail', JSON.stringify(error));
             });
         };
 
-        $scope.storeFile =
-            function(el) {
-                console.log('storeFile', el);
+        // $scope.storeFile =
+        //     function(el) {
+        //         console.log('storeFile', el);
+        //
+        //         var file = el.files[
+        //             0];
+        //         var reader = new FileReader();
+        //
+        //         reader.onloadend = function() {
+        //             console.log(reader.result);
+        //             $scope.fileData = reader.result;
+        //             // preview.src = reader.result;
+        //             $scope.save($scope.submission);
+        //         }
+        //
+        //         if (file) {
+        //             reader.readAsDataURL(file);
+        //         } else {
+        //             // preview.src = "";
+        //         }
+        //     };
 
-                var file = el.files[
-                    0];
-                var reader = new FileReader();
+        $scope.takePhoto = function(submission) {
 
-                reader.onloadend = function() {
-                    console.log(reader.result);
-                    $scope.fileData = reader.result;
-                    // preview.src = reader.result;
-                    $scope.save($scope.submission);
-                }
-
-                if (file) {
-                    reader.readAsDataURL(file);
-                } else {
-                    // preview.src = "";
-                }
+            var options = {
+              quality: 80,
+              destinationType: Camera.DestinationType.DATA_URL,
+              sourceType: Camera.PictureSourceType.CAMERA,
+              allowEdit: true,
+              encodingType: Camera.EncodingType.JPEG,
+              targetWidth: 300,
+              targetHeight: 300,
+              popoverOptions: CameraPopoverOptions,
+              saveToPhotoAlbum: false
             };
+
+            $cordovaCamera.getPicture(options).then(function(imageData) {
+              var image = document.getElementById('myImage');
+              var src = "data:image/jpeg;base64," + imageData;
+              // image.src
+            //   console.log('imgSrc', src);
+              submission.resource = src;
+            }, function(err) {
+              // error
+            });
+
+          };
 
     }
 ])

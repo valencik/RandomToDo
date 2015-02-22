@@ -32,23 +32,34 @@ The Friends service returns an array of friend data
             </label>
 
             <label class="item item-input" ng-if="submission.medium == 'Photo'">
+                <span class="input-label">Take Photo</span>
+                <button ng-click="takePhoto(submission)" class="button button-primary">Open Camera</button>
+                </br>
+            </label>
+
+            <div class="item item-image">
+                <img ng-src="{{submission.resource}}" />
+            </div>
+
+            <!--
+            <label class="item item-input" ng-if="submission.medium == 'Photo'">
                 <span class="input-label">Upload Photo</span>
                 <input type="file" accept="image/*" onchange="angular.element(this).scope().storeFile(this)" />
             </label>
 
             <label class="item item-input" ng-if="submission.medium == 'Video'">
                 <span class="input-label">Upload Video</span>
-                <input type="file" accept="video/*" />
+                <input type="file" accept="video/*" onchange="angular.element(this).scope().storeFile(this)" />
             </label>
 
             <label class="item item-input" ng-if="submission.medium == 'Audio'">
                 <span class="input-label">Upload Audio</span>
-                <input type="file" accept="audio/*" />
+                <input type="file" accept="audio/*" onchange="angular.element(this).scope().storeFile(this)" />
             </label>
+            -->
 
             <label class="item item-input">
-                <span class="input-label">Ready to Submit?</span>
-                <input type="submit" value="Yes, Save!" class="button button-light" />
+                <input type="submit" value="I am ready to submit!" class="button button-light" />
             </label>
 
         </form>
