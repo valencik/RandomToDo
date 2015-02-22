@@ -1,9 +1,16 @@
 <ion-view view-title="Gallery">
   <ion-content class="padding">
-  <div class="row responsive-lg">
-    <div class="col" ng-repeat="submission in submissions" ui-sref="tab.submission">
-      <img ng-src="{{submission.image}}">
-    </div>
+    <div ng-repeat="submission in submissions">
+      <div class="row responsive-sm" ng-if="$even">
+
+        <div class="col-50" ui-sref="tab.submission" style="text-align: center;">
+          <img ng-src="{{submissions[$index].image}}" width="300">
+        </div>
+        <div class="col-50" ui-sref="tab.submission" style="text-align: center;">
+          <img ng-src="{{submissions[$index+1].image}}" width="300">
+        </div>
+
+      </div>
     </div>
   </ion-content>
 </ion-view>
