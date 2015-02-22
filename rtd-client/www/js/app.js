@@ -37,6 +37,12 @@ angular.module('starter', ['ionic', 'lbServices'])
         controller: 'DashCtrl'
     })
 
+    .state('submission', {
+        url: '/submission/:submissionId/view',
+        templateUrl: 'templates/submission.html',
+        controller: 'SubmissionCtrl'
+    })
+
     // setup the main todo state with tabs
     .state('todo', {
         url: "/todo/:todoId",
@@ -70,16 +76,6 @@ angular.module('starter', ['ionic', 'lbServices'])
             'todo-submit': {
                 templateUrl: 'templates/todo-submit.html',
                 controller: 'SubmitCtrl'
-            }
-        }
-    })
-
-    .state('todo.submission', {
-        url: '/submission/:submissionId',
-        views: {
-            'todo-submission': {
-                templateUrl: 'templates/todo-submission.html',
-                controller: 'SubmissionCtrl'
             }
         }
     })

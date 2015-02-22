@@ -6,9 +6,7 @@ angular.module('starter')
 
 
 .controller('ChatsCtrl', ["$scope", "Message", function($scope, Message) {
-
     $scope.chats = Message.find();
-
 }])
 
 .controller('TodoCtrl', ["$scope", "$stateParams", "Todo", function($scope,
@@ -20,8 +18,8 @@ angular.module('starter')
 
 .controller('SubmissionCtrl', ["$scope", "$stateParams", "Todo", "Submission", "Message",
     function($scope, $stateParams, Todo, Submission, Message) {
+        console.log("SubmissionCtrl");
 
-        var todoId = $stateParams.todoId;
         var submissionId = $stateParams.submissionId;
 
         $scope.submission = Submission.findById({
@@ -31,7 +29,14 @@ angular.module('starter')
             id: submissionId
         });
 
+        $scope.todo = Submission.todo({
+            id: submissionId
+        });
+
+
         $scope.submitMessage = function(body) {
+
+            var todoId = $scope.todo.todoId;
 
             Message.create({
                     body: body,
@@ -59,7 +64,6 @@ angular.module('starter')
     }
 ])
 
-
 .controller('SubmitCtrl', ["$scope", "$stateParams", "Todo", "Submission",
     function($scope, $stateParams, Todo, Submission) {
 
@@ -80,7 +84,6 @@ angular.module('starter')
 
         $scope.reset = function() {
             console.log('reset');
-
         };
 
         $scope.save = function(submission) {

@@ -5,47 +5,54 @@ The FriendsCtrl pulls data from the Friends service (service.js)
 The Friends service returns an array of friend data
 -->
 <ion-view view-title="Submit for '{{todo.title}}'">
+
+    <ion-nav-buttons side="back">
+        <a class="button" ui-sref="dash">
+            <i class="icon ion-clipboard"></i> Todo
+        </a>
+    </ion-nav-buttons>
+
     <ion-content class="padding">
 
-    <form novalidate class="simple-form" ng-submit="save(submission)">
+        <form novalidate class="simple-form" ng-submit="save(submission)">
 
-        <label class="item item-input">
-            <span class="input-label">Todo Description</span>
-            <p>{{todo.description}}</p>
-        </label>
+            <label class="item item-input">
+                <span class="input-label">Todo Description</span>
+                <p>{{todo.description}}</p>
+            </label>
 
-        <label class="item item-input">
-            <span class="input-label">Caption</span>
-            <textarea placeholder="Enter caption..." rows="5" ng-model="submission.caption"></textarea>
-        </label>
+            <label class="item item-input">
+                <span class="input-label">Caption</span>
+                <textarea placeholder="Enter caption..." rows="5" ng-model="submission.caption"></textarea>
+            </label>
 
-        <label class="item item-input">
-            <span class="input-label">Medium</span>
-            <select ng-model="submission.medium" ng-options="medium as medium for medium in mediums"></select>
-        </label>
+            <label class="item item-input">
+                <span class="input-label">Medium</span>
+                <select ng-model="submission.medium" ng-options="medium as medium for medium in mediums"></select>
+            </label>
 
-        <label class="item item-input" ng-if="submission.medium == 'Photo'">
-            <span class="input-label">Upload Photo</span>
-            <input type="file" accept="image/*" />
-        </label>
+            <label class="item item-input" ng-if="submission.medium == 'Photo'">
+                <span class="input-label">Upload Photo</span>
+                <input type="file" accept="image/*" />
+            </label>
 
-        <label class="item item-input" ng-if="submission.medium == 'Video'">
-            <span class="input-label">Upload Video</span>
-            <input type="file" accept="video/*" />
-        </label>
+            <label class="item item-input" ng-if="submission.medium == 'Video'">
+                <span class="input-label">Upload Video</span>
+                <input type="file" accept="video/*" />
+            </label>
 
-        <label class="item item-input" ng-if="submission.medium == 'Audio'">
-            <span class="input-label">Upload Audio</span>
-            <input type="file" accept="audio/*" />
-        </label>
+            <label class="item item-input" ng-if="submission.medium == 'Audio'">
+                <span class="input-label">Upload Audio</span>
+                <input type="file" accept="audio/*" />
+            </label>
 
-        <label class="item item-input">
-            <span class="input-label">Ready to Submit?</span>
-            <input type="button" ng-click="reset()" value="No, Reset!" class="button button-light" />
-            <input type="submit" value="Yes, Save!" class="button button-light" />
-        </label>
+            <label class="item item-input">
+                <span class="input-label">Ready to Submit?</span>
+                <input type="button" ng-click="reset()" value="No, Reset!" class="button button-light" />
+                <input type="submit" value="Yes, Save!" class="button button-light" />
+            </label>
 
-      </form>
+        </form>
 
     </ion-content>
 </ion-view>
