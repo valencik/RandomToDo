@@ -15,8 +15,9 @@ angular.module('starter')
   $scope.todo = Todo.findById({id: $stateParams.todoId });
 }])
 
-.controller('ChatDetailCtrl', ["$scope", "Chats", function($scope, $stateParams, Chats) {
-  $scope.chat = Chats.get($stateParams.chatId);
+.controller('SubmissionCtrl', ["$scope", "$stateParams", "Todo", "Submission", function($scope, $stateParams, Todo, Submission) {
+  console.log("The SubmissionCtrl was called...");
+  $scope.submission = Submission.findById({id: $stateParams.submissionId });
 }])
 
 .controller('GalleryCtrl', ["$scope", "$stateParams", "Todo", "Submission", function($scope, $stateParams, Todo, Submission) {

@@ -1,0 +1,24 @@
+<!--
+This template loads for the 'tab.friend-detail' state (app.js)
+'friend' is a $scope variable created in the FriendsCtrl controller (controllers.js)
+The FriendsCtrl pulls data from the Friends service (service.js)
+The Friends service returns an array of friend data
+-->
+<ion-view view-title="Submission for '{{todo.title}}'">
+    <ion-content class="padding">
+
+    <div class="list card">
+
+      <div class="item item-image">
+        <img src="{{submission.resource}}">
+      </div>
+
+      <a class="item item-icon-left assertive" href="#">
+        <i class="icon ion-quote"></i>
+        {{submission.caption}}
+      </a>
+
+    </div>
+
+    </ion-content>
+</ion-view>

@@ -74,6 +74,17 @@ angular.module('starter', ['ionic', 'lbServices'])
         }
     })
 
+    .state('todo.submission', {
+        url: '/submission/:submissionId',
+        views: {
+            'todo-submission': {
+                templateUrl: 'templates/todo-submission.html',
+                controller: 'SubmissionCtrl'
+            }
+        }
+    })
+
+
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/dash');
 
