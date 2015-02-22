@@ -1,13 +1,3 @@
-function cleanRecords(records) {
-  return records.map(function(item) {
-    return item.rtd;
-  });
-}
-
-function cleanRecord(record) {
-  return record.rtd;
-}
-
 angular.module('starter')
 
 .controller('DashCtrl', ["$scope", "Todo", function($scope, Todo) {
@@ -15,7 +5,7 @@ angular.module('starter')
   Todo.find()
     .$promise
     .then(function(todos){
-      $scope.todos = cleanRecords(todos);
+      $scope.todos = todos;
       //console.log($scope.todos);
     });
 }])
@@ -27,7 +17,7 @@ angular.module('starter')
     Message.find()
       .$promise
       .then(function(records){
-        $scope.chats = cleanRecords(records);
+        $scope.chats = records;
         // console.log(records);
       });
 
