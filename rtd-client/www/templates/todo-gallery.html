@@ -1,8 +1,21 @@
 <ion-view view-title="Gallery">
   <ion-content class="padding">
 
-    <div ng-if="submissions.length == 0">
-        There are no submissions! <a ui-sref="todo.submit">Submit your own!</a>
+    <div class="list card" ng-if="submissions.length == 0">
+
+      <div class="item">
+        <h2>Oh no, there's nothing here.'</h2>
+      </div>
+
+      <div class="item item-image">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Crying-girl.jpg/800px-Crying-girl.jpg">
+      </div>
+
+      <a class="item item-icon-left assertive" ui-sref="todo.submit">
+        <i class="icon ion-ios7-cloud-upload"></i>
+        Submit something!
+      </a>
+
     </div>
 
     <div ng-repeat="submission in submissions">
