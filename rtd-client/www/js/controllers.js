@@ -37,6 +37,10 @@ angular.module('starter')
   $scope.chat = Chats.get($stateParams.chatId);
 }])
 
+.controller('GalleryCtrl', ["$scope", "Friends", function($scope, Friends) {
+  $scope.submissions = Friends.all();
+}])
+
 .controller('FriendsCtrl', ["$scope", "Friends", function($scope, Friends) {
   $scope.friends = Friends.all();
 }])
