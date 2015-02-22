@@ -24,6 +24,12 @@
         "string"
       ],
       "required": true
+    },
+    "modified": {
+      "type": "date"
+    },
+    "created": {
+      "type": "date"
     }
   },
   "validations": [],

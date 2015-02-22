@@ -26,6 +26,12 @@ ionic build ios
 ionic emulate ios
 ```
 
+Or develop live on real iOS device:
+
+```bash
+ionic run ios --livereload --consolelogs --serverlogs
+```
+
 ## Server
 
 See [rtd-server/ directory](rtd-server/).

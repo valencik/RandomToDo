@@ -8,7 +8,7 @@
 
     <ion-content>
 
-        <div class="card" ng-repeat="message in messages">
+        <div class="card" ng-repeat="message in messages | orderBy:predicate">
 
             <!-- Basic Message in Todo Feed -->
             <div class="item item-text-wrap" href="#" ng-hide="message.submissionId">
@@ -27,12 +27,13 @@
         <div class="bar bar-foot item-input-inset">
             <label class="item-input-wrapper">
                 <i class="icon ion-chatbox placeholder-icon"></i>
-                <input ng-model="body" type="text" ng-keypress="($event.which === 13)?submitMessage(body):0" placeholder="Send a message" />
+                <input ng-model="body" type="text" placeholder="Send a message" class="submission-comment"/>
             </label>
-            <button class="button button-clear">
-                Cancel
+            <button class="button" ng-click="submitMessage(body)">
+                Submit
             </button>
         </div>
+
 
     </ion-content>
 

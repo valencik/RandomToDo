@@ -9,7 +9,9 @@
 
     <ion-content class="padding">
 
+        <!--
         <button class="button button-assertive" ng-click="deleteSubmission(submission)">Delete</button>
+        -->
 
         <div class="list card">
 
@@ -23,7 +25,7 @@
 
         </div>
 
-        <div class="card" ng-repeat="message in messages">
+        <div class="card" ng-repeat="message in messages | orderBy:predicate">
 
             <!-- Basic Message in Todo Feed -->
             <div class="item item-text-wrap" href="#">
@@ -35,7 +37,7 @@
         <div class="bar bar-foot item-input-inset">
             <label class="item-input-wrapper">
                 <i class="icon ion-chatbox placeholder-icon"></i>
-                <input ng-model="body" type="text" placeholder="Send a message" id="submission-comment"/>
+                <input ng-model="body" type="text" placeholder="Send a message" class="submission-comment"/>
             </label>
             <button class="button" ng-click="submitMessage(body)">
                 Submit

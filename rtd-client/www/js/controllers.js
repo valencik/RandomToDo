@@ -43,30 +43,39 @@ angular.module('starter')
     });
 }])
 
-.controller('SubmissionCtrl', ["$scope", "$state", "$stateParams", "Todo",
+.controller('SubmissionCtrl', ["$scope", "$state", "$stateParams", "$interval", "Todo",
     "Submission",
     "Message",
-    function($scope, $state, $stateParams, Todo, Submission, Message) {
-        console.log("SubmissionCtrl");
+    function($scope, $state, $stateParams, $interval, Todo, Submission, Message) {
+        console.log("SubmissionCtrl", $stateParams);
 
         var submissionId = $stateParams.submissionId;
 
         $scope.submission = Submission.findById({
             id: submissionId
         });
-        $scope.messages = [];
-
-        Submission.messages({
-                id: submissionId
-            })
-            .$promise
-            .then(function(messages) {
-                $scope.messages = messages;
-            });
-
         $scope.todo = Submission.todo({
             id: submissionId
         });
+        $scope.messages = [];
+
+        var refreshFn = function() {
+            Submission.messages({
+                    id: submissionId
+                })
+                .$promise
+                .then(function(messages) {
+                    $scope.messages = messages;
+                }, function(error) {
+                    console.log('error refreshing messages',
+                        JSON.stringify(error));
+                });
+        };
+        $interval(refreshFn, 1000);
+        refreshFn();
+
+        $scope.predicate = 'created';
+
 
         $scope.submitMessage = function(body) {
 
@@ -81,20 +90,17 @@ angular.module('starter')
                 todoId: todoId,
                 submissionId: submissionId
             }, function() {
-                console.log('save finished');
+                console.log('save finished', JSON.stringify(
+                    arguments));
 
                 // clear field
                 $scope.body = "";
-                document.getElementById(
-                    'submission-comment').value = '';
+                var els = document.querySelectorAll('.submission-comment');
+                for (i = 0; i < els.length; i++) {
+                    els[i].value = '';
+                };
 
-                Submission.messages({
-                        id: submissionId
-                    })
-                    .$promise
-                    .then(function(messages) {
-                        $scope.messages = messages;
-                    });
+                refreshFn();
 
             });
         };
@@ -157,8 +163,10 @@ angular.module('starter')
     }
 ])
 
-.controller('SubmitCtrl', ["$scope", "$stateParams", "$state", "$cordovaCamera", "Todo", "Submission",
-    function($scope, $stateParams, $state, $cordovaCamera, Todo, Submission) {
+.controller('SubmitCtrl', ["$scope", "$stateParams", "$state", "$cordovaCamera",
+    "Todo", "Submission",
+    function($scope, $stateParams, $state, $cordovaCamera, Todo,
+        Submission) {
 
         var todoId = $stateParams.todoId;
 
@@ -182,17 +190,17 @@ angular.module('starter')
 
             // submission.resource = $scope.fileData;
             var record = Submission.create(submission)
-            .$promise
-            .then(function(result){
-                console.log('then', JSON.stringify(result));
+                .$promise
+                .then(function(result) {
+                    console.log('then', JSON.stringify(result));
 
-                $state.go('submission', {
-                    submissionId: result.id
+                    $state.go('submission', {
+                        submissionId: result.id
+                    });
+
+                }, function(error) {
+                    console.log('fail', JSON.stringify(error));
                 });
-
-            },function(error) {
-                console.log('fail', JSON.stringify(error));
-            });
         };
 
         // $scope.storeFile =
@@ -220,65 +228,87 @@ angular.module('starter')
         $scope.takePhoto = function(submission) {
 
             var options = {
-              quality: 80,
-              destinationType: Camera.DestinationType.DATA_URL,
-              sourceType: Camera.PictureSourceType.CAMERA,
-              allowEdit: true,
-              encodingType: Camera.EncodingType.JPEG,
-              targetWidth: 300,
-              targetHeight: 300,
-              popoverOptions: CameraPopoverOptions,
-              saveToPhotoAlbum: false
+                quality: 80,
+                destinationType: Camera.DestinationType.DATA_URL,
+                sourceType: Camera.PictureSourceType.CAMERA,
+                allowEdit: true,
+                encodingType: Camera.EncodingType.JPEG,
+                targetWidth: 300,
+                targetHeight: 300,
+                popoverOptions: CameraPopoverOptions,
+                saveToPhotoAlbum: false
             };
 
-            $cordovaCamera.getPicture(options).then(function(imageData) {
-              var image = document.getElementById('myImage');
-              var src = "data:image/jpeg;base64," + imageData;
-              // image.src
-            //   console.log('imgSrc', src);
-              submission.resource = src;
+            $cordovaCamera.getPicture(options).then(function(
+                imageData) {
+                var image = document.getElementById(
+                    'myImage');
+                var src = "data:image/jpeg;base64," +
+                    imageData;
+                // image.src
+                //   console.log('imgSrc', src);
+                submission.resource = src;
             }, function(err) {
-              // error
+                // error
             });
 
-          };
+        };
 
     }
 ])
 
-.controller('FeedCtrl', ["$scope", "$stateParams", "Todo", "Message", function(
-    $scope, $stateParams, Todo, Message) {
-    var todoId = $stateParams.todoId;
-    $scope.messages = Todo.messages({
-        id: $stateParams.todoId
-    });
+.controller('FeedCtrl', ["$scope", "$stateParams", "$interval", "Todo",
+    "Message",
+    function(
+        $scope, $stateParams, $interval, Todo, Message) {
+        var todoId = $stateParams.todoId;
+        $scope.messages = [];
 
-    $scope.submitMessage = function(body) {
 
-        Message.create({
+        var refreshFn = function() {
+            console.log('refreshing');
+            Todo.messages({
+                    id: todoId,
+                })
+                .$promise
+                .then(function(results) {
+                    console.log('refresh');
+                    $scope.messages = results;
+                });
+        };
+        $interval(refreshFn, 1000);
+
+        $scope.predicate = 'created';
+
+        $scope.submitMessage = function(body) {
+
+            Message.create({
                 body: body,
                 todoId: todoId
-            })
-            .$save()
-            .then(function() {
-                Todo.messages({
-                        id: $stateParams.todoId
-                    })
-                    .$promise
-                    .then(function(result) {
-                        $scope.messages = result;
-                    });
+            }, function() {
+                console.log('save finished');
+
+                // clear field
                 $scope.body = "";
+                var els = document.querySelectorAll('.submission-comment');
+                for (i = 0; i < els.length; i++) {
+                    els[i].value = '';
+                };
+
+                refreshFn();
+
             });
-    };
+        };
 
-    $scope.submissionForMessage = function(message) {
-        return Message.submission({
-            id: message.id
-        });
-    };
 
-}])
+        $scope.submissionForMessage = function(message) {
+            return Message.submission({
+                id: message.id
+            });
+        };
+
+    }
+])
 
 // .controller('FriendsCtrl', ["$scope", "Friends", function($scope, Friends) {
 //   $scope.friends = Friends.all();
