@@ -1,25 +1,36 @@
 <ion-view view-title="Feed for '{{todo.title}}'">
-  <ion-content>
+    <ion-content>
 
-    <div class="card" ng-repeat="message in messages">
-      <div class="item item-text-wrap" href="#">
-        {{message.body}}
-      </div>
-    </div>
+        <div class="card" ng-repeat="message in messages">
 
-    <div class="bar bar-foot item-input-inset">
-      <label class="item-input-wrapper">
-        <i class="icon ion-chatbox placeholder-icon"></i>
-        <input ng-model="body" type="text"
-            ng-keypress="($event.which === 13)?submitMessage(body):0"
-            placeholder="Send a message"
-            />
+            <!-- Basic Message in Todo Feed -->
+            <div class="item item-text-wrap" href="#" ng-show="!message.submissionId">
+                {{message.body}}
+            </div>
 
-      </label>
-      <button class="button button-clear">
-        Cancel
-      </button>
-    </div>
+            <!-- Comment on Submission -->
+            <div ng-show="message.submissionId">
+                <div class="item item-image">
+                    <img src="{{submission.resource}}">
+                </div>
 
-  </ion-content>
+                <a class="item item-icon-left assertive" href="#">
+                    <i class="icon ion-quote"></i> {{submission.caption}}
+                </a>
+            </div>
+
+        </div>
+
+        <div class="bar bar-foot item-input-inset">
+            <label class="item-input-wrapper">
+                <i class="icon ion-chatbox placeholder-icon"></i>
+                <input ng-model="body" type="text" ng-keypress="($event.which === 13)?submitMessage(body):0" placeholder="Send a message" />
+
+            </label>
+            <button class="button button-clear">
+                Cancel
+            </button>
+        </div>
+
+    </ion-content>
 </ion-view>

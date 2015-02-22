@@ -13,5 +13,11 @@
     "n1qlport": 8093,
     "connectionTimeout": 20000,
     "operationTimeout": 15000
+  },
+  "files": {
+    "name": "files",
+    "connector": "loopback-component-storage",
+    "provider": "filesystem",
+    "root": "client"
   }
 }

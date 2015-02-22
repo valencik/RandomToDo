@@ -70,6 +70,7 @@ angular.module('starter')
             $scope.body = "";
         });
     };
+
 }])
 
 // .controller('FriendsCtrl', ["$scope", "Friends", function($scope, Friends) {

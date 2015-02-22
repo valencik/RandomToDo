@@ -1,4 +1,4 @@
-// Ionic Starter App
+// RandomToDo
 
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
@@ -37,7 +37,7 @@ angular.module('starter', ['ionic', 'lbServices'])
         controller: 'DashCtrl'
     })
 
-    // setup an abstract state for the tabs directive
+    // setup the main todo state with tabs
     .state('todo', {
         url: "/todo/:todoId",
         templateUrl: "templates/todo-tabs.html",
@@ -73,16 +73,6 @@ angular.module('starter', ['ionic', 'lbServices'])
             }
         }
     })
-
-    // .state('tab.account', {
-    //     url: '/account',
-    //     views: {
-    //         'tab-account': {
-    //             templateUrl: 'templates/tab-account.html',
-    //             controller: 'AccountCtrl'
-    //         }
-    //     }
-    // });
 
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/dash');
