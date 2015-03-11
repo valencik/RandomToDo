@@ -31,16 +31,30 @@ angular.module('starter')
 
 }])
 
-
 .controller('ChatsCtrl', ["$scope", "Message", function($scope, Message) {
     $scope.chats = Message.find();
 }])
 
-.controller('TodoCtrl', ["$scope", "$stateParams", "Todo", function($scope,
+.controller('TodoCtrl', ["$scope", "$rootScope", "$stateParams", "Todo",
+function($scope, $rootScope,
     $stateParams, Todo) {
-    $scope.todo = Todo.findById({
-        id: $stateParams.todoId
-    });
+
+    var refreshTodo = function(params) {
+        $scope.todo = Todo.findById({
+            id: params.todoId
+        });
+    };
+    refreshTodo($stateParams);
+
+    $rootScope.$on('$stateChangeStart',
+        function(event, toState, toParams, fromState,
+            fromParams) {
+            // event.preventDefault();
+            // transitionTo() promise will be rejected with
+            // a 'transition prevented' error
+            refreshTodo(toParams);
+        });
+
 }])
 
 .controller('SubmissionCtrl', ["$scope", "$state", "$stateParams", "$interval", "Todo",
@@ -60,16 +74,20 @@ angular.module('starter')
         $scope.messages = [];
 
         var refreshFn = function() {
-            Submission.messages({
-                    id: submissionId
-                })
-                .$promise
-                .then(function(messages) {
-                    $scope.messages = messages;
-                }, function(error) {
-                    console.log('error refreshing messages',
-                        JSON.stringify(error));
-                });
+            try {
+                Submission.messages({
+                        id: submissionId
+                    })
+                    .$promise
+                    .then(function(messages) {
+                        $scope.messages = messages;
+                    }, function(error) {
+                        console.log('error refreshing messages',
+                            JSON.stringify(error));
+                    });
+            } catch (error) {
+                console.error(error);
+            }
         };
         $interval(refreshFn, 1000);
         refreshFn();
@@ -134,11 +152,11 @@ angular.module('starter')
 
         $scope.submissions = [];
 
-        function initScope() {
+        function initScope(params) {
             console.log('initScope');
 
             Todo.submissions({
-                    id: $stateParams.todoId
+                    id: params.todoId
                 })
                 .$promise
                 .then(function(results) {
@@ -147,7 +165,7 @@ angular.module('starter')
                 });
         }
 
-        initScope();
+        initScope($stateParams);
 
         // $scope.$on('$routeChangeUpdate', initScope);
         // $scope.$on('$routeChangeSuccess', initScope);
@@ -155,10 +173,13 @@ angular.module('starter')
         $rootScope.$on('$stateChangeStart',
             function(event, toState, toParams, fromState,
                 fromParams) {
+                    console.log('$stateChangeStart');
+                    console.log(JSON.stringify(toState, null, 4));
+                    console.log(JSON.stringify(toParams, null, 4));
                 // event.preventDefault();
                 // transitionTo() promise will be rejected with
                 // a 'transition prevented' error
-                initScope();
+                initScope(toParams);
             })
     }
 ])

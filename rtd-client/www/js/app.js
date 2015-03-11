@@ -86,6 +86,6 @@ angular.module('starter', ['ionic', 'ngCordova', 'lbServices'])
     $urlRouterProvider.otherwise('/dash');
 
     // Change the URL where to access the LoopBack REST API server
-    LoopBackResourceProvider.setUrlBase('http://172.21.44.141:3000/api');
+    LoopBackResourceProvider.setUrlBase('http://localhost:3000/api');
 
 });
