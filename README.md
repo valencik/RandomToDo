@@ -7,9 +7,10 @@ Get random things done with everyone else in the world.
 
 > Get random things done with everyone else in the world.
 
-### Screenshots
+### Demo
 
-*Coming soon.*
+Checkout the writeup and demo of our experiences at:
+[Coffee on Couchbase: RandomToDo with Couchbase Mobile](http://blog.couchbase.com/coffee-on-couchbase-randomtodo-with-couchbase-mobile)
 
 ## Client
 
